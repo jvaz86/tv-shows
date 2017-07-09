@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
+import {fullWhite} from 'material-ui/styles/colors';
 import TextField from 'material-ui/TextField';
-
 
 const LoginForm = ({
   onSubmit,
@@ -14,6 +13,7 @@ const LoginForm = ({
 }) => (
   <Card className="container">
     <form action="/" onSubmit={onSubmit}>
+      <br/>
       <h2 className="card-heading">Login</h2>
 
       {errors.summary && <p className="error-message">{errors.summary}</p>}
@@ -40,10 +40,10 @@ const LoginForm = ({
       </div>
 
       <div className="button-line">
-        <RaisedButton type="submit" label="Log in" primary />
+        <RaisedButton type="submit" label="Log in" backgroundColor="#B8B3B2" labelColor="#3D3B3A"/>
       </div>
-
-      <CardText>Do not have an account? <Link to={'/signup'}>Create one</Link>.</CardText>
+      <br />
+      <br />
     </form>
   </Card>
 );
