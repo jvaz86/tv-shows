@@ -18,6 +18,10 @@ function validateLoginForm(payload) {
   if (!payload || typeof payload.email !== 'string' || payload.email.trim().length === 0) {
     isFormValid = false;
     errors.email = 'Please put your email address.';
+
+  }else if (payload.email != '' && !validator.isEmail(payload.email)) {
+    isFormValid = false;
+    errors.email = 'It is not an email address.';
   }
 
   if (!payload || typeof payload.password !== 'string' || payload.password.trim().length === 0) {
@@ -25,28 +29,33 @@ function validateLoginForm(payload) {
     errors.password = 'Please put your password.';
   }
 
-  if (!isFormValid) {
-    message = 'Check the form for errors.';
+  if (isFormValid) {
+    return {
+      success: isFormValid,
+      data: payload
+    };
+  }else{
+    return {
+      success: isFormValid,
+      errors
+    };
   }
-
-  return {
-    success: isFormValid,
-    message,
-    errors
-  };
 }
 
 router.post('/login', (req, res) => {
   const validationResult = validateLoginForm(req.body);
   if (!validationResult.success) {
-    return res.status(400).json({
-      success: false,
+    return res.status(200).json({
+      success: validationResult.success,
       message: validationResult.message,
       errors: validationResult.errors
     });
   }
 
-  return res.status(200).end();
+  return res.status(200).json({
+    success: validationResult.success,
+    data: validationResult.data
+  });
 });
 
 

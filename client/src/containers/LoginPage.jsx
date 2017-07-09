@@ -1,5 +1,8 @@
-import React, { PropTypes } from 'react';
+'use strict' //This is for use new ECMAScript 6 variables type
+
+import React from 'react';
 import LoginForm from '../components/LoginForm.jsx';
+import Auth from '../modules/Auth';
 
 
 class LoginPage extends React.Component {
@@ -31,12 +34,12 @@ class LoginPage extends React.Component {
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
-      if (xhr.status === 200) {
+      if (xhr.response.succes === true) {
         this.setState({
           errors: {}
         });
-
-        console.log('The form is valid');
+        
+        
       } else {
         const errors = xhr.response.errors ? xhr.response.errors : {};
         errors.summary = xhr.response.message;

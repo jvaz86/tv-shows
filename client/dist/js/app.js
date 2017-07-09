@@ -86,9 +86,9 @@
 	(0, _reactTapEventPlugin2.default)();
 
 	_reactDom2.default.render(_react2.default.createElement(
-	  _MuiThemeProvider2.default,
-	  { muiTheme: (0, _getMuiTheme2.default)(_darkBaseTheme2.default) },
-	  _react2.default.createElement(_reactRouter.Router, { history: _reactRouter.browserHistory, routes: _routes2.default })
+		_MuiThemeProvider2.default,
+		{ muiTheme: (0, _getMuiTheme2.default)(_darkBaseTheme2.default) },
+		_react2.default.createElement(_reactRouter.Router, { history: _reactRouter.browserHistory, routes: _routes2.default })
 	), document.getElementById('react-app'));
 
 /***/ }),
@@ -39885,6 +39885,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _propTypes = __webpack_require__(365);
+
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+
 	var _reactRouter = __webpack_require__(390);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -39901,7 +39905,7 @@
 	};
 
 	Base.propTypes = {
-	  children: _react.PropTypes.object.isRequired
+	  children: _propTypes2.default.object.isRequired
 	};
 
 	exports.default = Base;
@@ -41443,7 +41447,7 @@
 /* 460 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	'use strict'; //This is for use new ECMAScript 6 variables type
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -41458,6 +41462,10 @@
 	var _LoginForm = __webpack_require__(461);
 
 	var _LoginForm2 = _interopRequireDefault(_LoginForm);
+
+	var _Auth = __webpack_require__(473);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41504,12 +41512,10 @@
 	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	      xhr.responseType = 'json';
 	      xhr.addEventListener('load', function () {
-	        if (xhr.status === 200) {
+	        if (xhr.response.succes === true) {
 	          _this2.setState({
 	            errors: {}
 	          });
-
-	          console.log('The form is valid');
 	        } else {
 	          var errors = xhr.response.errors ? xhr.response.errors : {};
 	          errors.summary = xhr.response.message;
@@ -41562,6 +41568,10 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _propTypes = __webpack_require__(365);
+
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 
 	var _reactRouter = __webpack_require__(390);
 
@@ -41636,10 +41646,10 @@
 	};
 
 	LoginForm.propTypes = {
-	  onSubmit: _react.PropTypes.func.isRequired,
-	  onChange: _react.PropTypes.func.isRequired,
-	  errors: _react.PropTypes.object.isRequired,
-	  user: _react.PropTypes.object.isRequired
+	  onSubmit: _propTypes2.default.func.isRequired,
+	  onChange: _propTypes2.default.func.isRequired,
+	  errors: _propTypes2.default.object.isRequired,
+	  user: _propTypes2.default.object.isRequired
 	};
 
 	exports.default = LoginForm;
@@ -43634,6 +43644,12 @@
 
 	exports.default = TextFieldUnderline;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 473 */
+/***/ (function(module, exports) {
+
+	"use strict";
 
 /***/ })
 /******/ ]);
