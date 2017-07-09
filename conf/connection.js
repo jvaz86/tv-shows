@@ -6,7 +6,7 @@ const cn = mysql.createConnection({
 	host: 'localhost',
 	user: 'root',
 	password: '',
-	database: 'node_shop'
+	database: 'tv_shows'
 })
 
 cn.connect((err) => {

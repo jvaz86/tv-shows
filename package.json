@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/jvaz86/tv-shows#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "material-ui": "^0.16.5",
