@@ -1,7 +1,7 @@
 'use strict' //This is for use new ECMAScript 6 variables type
 
 const connect = require('../conf/connection')
-//const bcrypt = require('bcrypt-nodejs')
+const bcrypt = require('bcrypt-nodejs')
 
 function getUser(req,res){
 	console.log('getting an user...')
