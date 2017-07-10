@@ -39859,6 +39859,10 @@
 
 	var _LoginPage2 = _interopRequireDefault(_LoginPage);
 
+	var _Dashboard = __webpack_require__(474);
+
+	var _Dashboard2 = _interopRequireDefault(_Dashboard);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var routes = {
@@ -39866,6 +39870,9 @@
 	  childRoutes: [{
 	    path: '/',
 	    component: _LoginPage2.default
+	  }, {
+	    path: '/dashboard',
+	    component: _Dashboard2.default
 	  }]
 	};
 
@@ -41463,6 +41470,10 @@
 
 	var _LoginForm2 = _interopRequireDefault(_LoginForm);
 
+	var _propTypes = __webpack_require__(365);
+
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+
 	var _Auth = __webpack_require__(473);
 
 	var _Auth2 = _interopRequireDefault(_Auth);
@@ -41478,10 +41489,10 @@
 	var LoginPage = function (_React$Component) {
 	  _inherits(LoginPage, _React$Component);
 
-	  function LoginPage(props) {
+	  function LoginPage(props, context) {
 	    _classCallCheck(this, LoginPage);
 
-	    var _this = _possibleConstructorReturn(this, (LoginPage.__proto__ || Object.getPrototypeOf(LoginPage)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (LoginPage.__proto__ || Object.getPrototypeOf(LoginPage)).call(this, props, context));
 
 	    _this.state = {
 	      errors: {},
@@ -41512,15 +41523,52 @@
 	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	      xhr.responseType = 'json';
 	      xhr.addEventListener('load', function () {
-	        if (xhr.response.succes === true) {
+	        console.log(xhr.response);
+	        if (xhr.response.success) {
 	          _this2.setState({
 	            errors: {}
 	          });
+
+	          _this2.validUser(xhr.response.data);
 	        } else {
 	          var errors = xhr.response.errors ? xhr.response.errors : {};
 	          errors.summary = xhr.response.message;
 
 	          _this2.setState({
+	            errors: errors
+	          });
+	        }
+	      });
+	      xhr.send(formData);
+	    }
+	  }, {
+	    key: 'validUser',
+	    value: function validUser(data) {
+	      var _this3 = this;
+
+	      var email = data.email;
+	      var password = data.password;
+	      var formData = 'email=' + email + '&password=' + password;
+
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('post', '/api/user/login');
+	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	      xhr.responseType = 'json';
+	      xhr.addEventListener('load', function () {
+	        console.log('llegando user validate');
+	        console.log(xhr.response);
+	        if (xhr.response.login) {
+	          _this3.setState({
+	            errors: {}
+	          });
+
+	          console.log('login correct');
+	          _this3.context.router.replace('/dashboard');
+	        } else {
+	          var errors = xhr.response.errors ? xhr.response.errors : {};
+	          errors.summary = xhr.response.message;
+
+	          _this3.setState({
 	            errors: errors
 	          });
 	        }
@@ -41552,6 +41600,10 @@
 
 	  return LoginPage;
 	}(_react2.default.Component);
+
+	LoginPage.contextTypes = {
+	  router: _propTypes2.default.object.isRequired
+	};
 
 	exports.default = LoginPage;
 
@@ -43650,6 +43702,51 @@
 /***/ (function(module, exports) {
 
 	"use strict";
+
+/***/ }),
+/* 474 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _propTypes = __webpack_require__(365);
+
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+
+	var _Card = __webpack_require__(448);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Dashboard = function Dashboard(_ref) {
+	  var secretData = _ref.secretData;
+	  return _react2.default.createElement(
+	    _Card.Card,
+	    { className: 'container' },
+	    _react2.default.createElement(_Card.CardTitle, {
+	      title: 'Dashboard',
+	      subtitle: 'You should get access to this page only after authentication.'
+	    }),
+	    secretData && _react2.default.createElement(
+	      _Card.CardText,
+	      { style: { fontSize: '16px', color: 'green' } },
+	      secretData
+	    )
+	  );
+	};
+
+	Dashboard.propTypes = {
+	  secretData: _propTypes2.default.string.isRequired
+	};
+
+	exports.default = Dashboard;
 
 /***/ })
 /******/ ]);

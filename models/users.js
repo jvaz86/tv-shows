@@ -1,55 +1,32 @@
 'use strict' //This is for use new ECMAScript 6 variables type
 
-const connect = require('../conf/connection')
-const bcrypt = require('bcrypt-nodejs')
+const connect = require('../conf/connection');
+const bcrypt = require('bcrypt-nodejs');
 
 function getUser(req,res){
-	console.log('getting an user...')
+	var query = `SELECT * FROM tv_shows.users WHERE email='${req.body.email}'`;
 
-	if(
-		req.body.pass != "" && req.body.pass &&
-	    req.body.email != "" && req.body.email
-	    ){
+	connect.cn.query(query,(err, user) => {
+		if (user.length == 0) {
+			res.status(200).send({
+				login: false,
+				message: 'Email is wrong'
+			});
+		}else{
+			bcrypt.compare(req.body.password, user[0].pass, function(err, isMatch) {
+			    if (!isMatch) {
+			    	res.status(200).send({
+						login: isMatch,
+						message: 'Password is wrong'
+					});
+			    }
 
-		bcrypt.genSalt(10,(err,salt) => {
-			console.log(salt)
-			if (err) {
-				res.status(500).send({
-					err: 'Encryption error with the salt'
-				})
-			}else{
-				bcrypt.hash(req.body.pass, salt, null, (err,hash) => {
-					if (err) {
-						res.status(500).send({
-							err: 'Encryption error with the hash'
-						})
-					}else{
-						req.body.pass = hash
-
-						let query = `SELECT * FROM users 
-											WHERE email='${req.body.email}' and 
-												  pas='${hash}'`
-						connect.cn.query(query,(err, user) => {
-							//cn.end()
-							if(err){
-								res.status(500).send({
-									err: err
-								})
-							}else{
-								res.status(200).send({
-									user: user
-								})
-							}
-						})
-					}
-				})
-			}
-		})
-	}else{
-		res.status(500).send({
-			err: "The data is not completed"
-		})
-	}
+			    res.status(200).send({
+					login: isMatch
+				});
+			});
+		}
+	})
 }
 
 module.exports = {

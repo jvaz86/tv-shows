@@ -2,13 +2,14 @@
 
 import React from 'react';
 import LoginForm from '../components/LoginForm.jsx';
+import PropTypes from 'prop-types';
 import Auth from '../modules/Auth';
 
 
 class LoginPage extends React.Component {
 
-  constructor(props) {
-    super(props);
+  constructor(props,context) {
+    super(props,context);
 
     this.state = {
       errors: {},
@@ -34,11 +35,46 @@ class LoginPage extends React.Component {
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
-      if (xhr.response.succes === true) {
+      console.log(xhr.response);
+      if (xhr.response.success) {
+        this.setState({
+          errors: {}
+        });
+
+        this.validUser(xhr.response.data);
+
+      } else {
+        const errors = xhr.response.errors ? xhr.response.errors : {};
+        errors.summary = xhr.response.message;
+
+        this.setState({
+          errors
+        });
+      }
+    });
+    xhr.send(formData);
+  }
+
+  validUser(data) {
+
+    const email = data.email;
+    const password = data.password;
+    const formData = `email=${email}&password=${password}`;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('post', '/api/user/login');
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', () => {
+      console.log('llegando user validate');
+      console.log(xhr.response);
+      if (xhr.response.login) {
         this.setState({
           errors: {}
         });
         
+        console.log('login correct');
+        this.context.router.replace('/dashboard');
         
       } else {
         const errors = xhr.response.errors ? xhr.response.errors : {};
@@ -50,6 +86,7 @@ class LoginPage extends React.Component {
       }
     });
     xhr.send(formData);
+
   }
 
   changeUser(event) {
@@ -74,5 +111,10 @@ class LoginPage extends React.Component {
   }
 
 }
+
+LoginPage.contextTypes = {
+  router: PropTypes.object.isRequired
+};
+
 
 export default LoginPage;
