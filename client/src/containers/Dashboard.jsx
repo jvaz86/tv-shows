@@ -13,25 +13,27 @@ class DashboardPage extends React.Component {
 	    this.state = {
 	      listTvShows: []
 	    };
+	}
 
-	    const xhr = new XMLHttpRequest();
-	    xhr.open('get', 'http://api.tvmaze.com/shows');
-	    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	    xhr.responseType = 'json';
-	    xhr.addEventListener('load', () => {
-	    	console.log(xhr.response);
-	        this.setState({
-	          listTvShows: xhr.response
-	        });
-	    });
+	componentWillMount() {
+		fetch('http://api.tvmaze.com/shows')
+		.then((response) => {
+			return response.json()
+		})
+		.then((shows) => {
+			this.setState({ listTvShows: shows })
+		})
+	}
 
-	    xhr.send();
+	setFavorite(value){
+		console.log('eject... '+ value)
 	}
 	
   	render() {
 	    return (
 	      <Dashboard
 	        listdos={this.state.listTvShows}
+	        onClick={this.setFavorite}
 	      />
 	    );
   	}

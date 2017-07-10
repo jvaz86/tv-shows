@@ -30,28 +30,31 @@ class LoginPage extends React.Component {
     const password = encodeURIComponent(this.state.user.password);
     const formData = `email=${email}&password=${password}`;
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('post', '/auth/login');
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.responseType = 'json';
-    xhr.addEventListener('load', () => {
-      if (xhr.response.success) {
+    fetch(`/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData
+    })
+    .then((response) => {
+      return response.json()
+    })
+    .then((login) => {
+      if (login.success) {
         this.setState({
           errors: {}
         });
 
-        this.validUser(xhr.response.data);
+        this.validUser(login.data);
 
       } else {
-        const errors = xhr.response.errors ? xhr.response.errors : {};
-        errors.summary = xhr.response.message;
+        const errors = login.errors ? login.errors : {};
+        errors.summary = login.message;
 
         this.setState({
           errors
         });
       }
-    });
-    xhr.send(formData);
+    })
   }
 
   validUser(data) {
@@ -60,12 +63,16 @@ class LoginPage extends React.Component {
     const password = data.password;
     const formData = `email=${email}&password=${password}`;
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('post', '/api/user/login');
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.responseType = 'json';
-    xhr.addEventListener('load', () => {
-      if (xhr.response.login) {
+    fetch(`/api/user/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData
+    })
+    .then((response) => {
+      return response.json()
+    })
+    .then((login) => {
+      if (login.login) {
         this.setState({
           errors: {}
         });
@@ -73,15 +80,14 @@ class LoginPage extends React.Component {
         this.context.router.replace('/dashboard');
 
       } else {
-        const errors = xhr.response.errors ? xhr.response.errors : {};
-        errors.summary = xhr.response.message;
+        const errors = login.errors ? login.errors : {};
+        errors.summary = login.message;
 
         this.setState({
           errors
         });
       }
-    });
-    xhr.send(formData);
+    })
 
   }
 
