@@ -39859,7 +39859,7 @@
 
 	var _LoginPage2 = _interopRequireDefault(_LoginPage);
 
-	var _Dashboard = __webpack_require__(482);
+	var _Dashboard = __webpack_require__(474);
 
 	var _Dashboard2 = _interopRequireDefault(_Dashboard);
 
@@ -43703,6 +43703,79 @@
 /* 474 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	'use strict'; //This is for use new ECMAScript 6 variables type
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Dashboard = __webpack_require__(475);
+
+	var _Dashboard2 = _interopRequireDefault(_Dashboard);
+
+	var _propTypes = __webpack_require__(365);
+
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DashboardPage = function (_React$Component) {
+		_inherits(DashboardPage, _React$Component);
+
+		function DashboardPage(props) {
+			_classCallCheck(this, DashboardPage);
+
+			var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
+
+			_this.state = {
+				listTvShows: []
+			};
+
+			var xhr = new XMLHttpRequest();
+			xhr.open('get', 'http://api.tvmaze.com/shows');
+			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			xhr.responseType = 'json';
+			xhr.addEventListener('load', function () {
+				console.log(xhr.response);
+				_this.setState({
+					listTvShows: xhr.response
+				});
+			});
+
+			xhr.send();
+			return _this;
+		}
+
+		_createClass(DashboardPage, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(_Dashboard2.default, {
+					listdos: this.state.listTvShows
+				});
+			}
+		}]);
+
+		return DashboardPage;
+	}(_react2.default.Component);
+
+	exports.default = DashboardPage;
+
+/***/ }),
+/* 475 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -43717,17 +43790,17 @@
 
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 
-	var _GridList = __webpack_require__(475);
+	var _GridList = __webpack_require__(476);
 
 	var _IconButton = __webpack_require__(349);
 
 	var _IconButton2 = _interopRequireDefault(_IconButton);
 
-	var _Subheader = __webpack_require__(479);
+	var _Subheader = __webpack_require__(480);
 
 	var _Subheader2 = _interopRequireDefault(_Subheader);
 
-	var _starBorder = __webpack_require__(481);
+	var _starBorder = __webpack_require__(482);
 
 	var _starBorder2 = _interopRequireDefault(_starBorder);
 
@@ -43745,44 +43818,8 @@
 	  }
 	};
 
-	var tilesData = [{
-	  img: 'images/grid-list/00-52-29-429_640.jpg',
-	  title: 'Breakfast',
-	  author: 'jill111'
-	}, {
-	  img: 'images/grid-list/burger-827309_640.jpg',
-	  title: 'Tasty burger',
-	  author: 'pashminu'
-	}, {
-	  img: 'images/grid-list/camera-813814_640.jpg',
-	  title: 'Camera',
-	  author: 'Danson67'
-	}, {
-	  img: 'images/grid-list/morning-819362_640.jpg',
-	  title: 'Morning',
-	  author: 'fancycrave1'
-	}, {
-	  img: 'images/grid-list/hats-829509_640.jpg',
-	  title: 'Hats',
-	  author: 'Hans'
-	}, {
-	  img: 'images/grid-list/honey-823614_640.jpg',
-	  title: 'Honey',
-	  author: 'fancycravel'
-	}, {
-	  img: 'images/grid-list/vegetables-790022_640.jpg',
-	  title: 'Vegetables',
-	  author: 'jill111'
-	}, {
-	  img: 'images/grid-list/water-plant-821293_640.jpg',
-	  title: 'Water plant',
-	  author: 'BkrmadtyaKarki'
-	}];
-
-	/**
-	 * A simple example of a scrollable `GridList` containing a [Subheader](/#/components/subheader).
-	 */
-	var GridListTvShows = function GridListTvShows() {
+	var GridListTvShows = function GridListTvShows(_ref) {
+	  var listdos = _ref.listdos;
 	  return _react2.default.createElement(
 	    'div',
 	    { style: styles.root },
@@ -43797,7 +43834,7 @@
 	        null,
 	        'December'
 	      ),
-	      listTvShows.map(function (tile) {
+	      listdos.map(function (tile) {
 	        return _react2.default.createElement(
 	          _GridList.GridTile,
 	          {
@@ -43817,8 +43854,7 @@
 	              _IconButton2.default,
 	              null,
 	              _react2.default.createElement(_starBorder2.default, { color: 'white' })
-	            )
-	          },
+	            ) },
 	          _react2.default.createElement('img', { src: tile.image.medium })
 	        );
 	      })
@@ -43829,7 +43865,7 @@
 	exports.default = GridListTvShows;
 
 /***/ }),
-/* 475 */
+/* 476 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43839,11 +43875,11 @@
 	});
 	exports.default = exports.GridTile = exports.GridList = undefined;
 
-	var _GridList2 = __webpack_require__(476);
+	var _GridList2 = __webpack_require__(477);
 
 	var _GridList3 = _interopRequireDefault(_GridList2);
 
-	var _GridTile2 = __webpack_require__(477);
+	var _GridTile2 = __webpack_require__(478);
 
 	var _GridTile3 = _interopRequireDefault(_GridTile2);
 
@@ -43854,7 +43890,7 @@
 	exports.default = _GridList3.default;
 
 /***/ }),
-/* 476 */
+/* 477 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -44001,7 +44037,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 477 */
+/* 478 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -44038,7 +44074,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _defineProperty2 = __webpack_require__(478);
+	var _defineProperty2 = __webpack_require__(479);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -44307,7 +44343,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 478 */
+/* 479 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -44336,7 +44372,7 @@
 	};
 
 /***/ }),
-/* 479 */
+/* 480 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44346,7 +44382,7 @@
 	});
 	exports.default = undefined;
 
-	var _Subheader = __webpack_require__(480);
+	var _Subheader = __webpack_require__(481);
 
 	var _Subheader2 = _interopRequireDefault(_Subheader);
 
@@ -44355,7 +44391,7 @@
 	exports.default = _Subheader2.default;
 
 /***/ }),
-/* 480 */
+/* 481 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -44440,7 +44476,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 481 */
+/* 482 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44475,85 +44511,6 @@
 	ToggleStarBorder.muiName = 'SvgIcon';
 
 	exports.default = ToggleStarBorder;
-
-/***/ }),
-/* 482 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict'; //This is for use new ECMAScript 6 variables type
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Dashboard = __webpack_require__(474);
-
-	var _Dashboard2 = _interopRequireDefault(_Dashboard);
-
-	var _propTypes = __webpack_require__(365);
-
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var DashboardPage = function (_React$Component) {
-		_inherits(DashboardPage, _React$Component);
-
-		function DashboardPage(props) {
-			_classCallCheck(this, DashboardPage);
-
-			var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
-
-			_this.setState = {
-				listTvShows: []
-			};
-			return _this;
-		}
-
-		_createClass(DashboardPage, [{
-			key: 'getListTvShows',
-			value: function getListTvShows(event) {
-				var _this2 = this;
-
-				event.preventDefault();
-
-				var xhr = new XMLHttpRequest();
-				xhr.open('get', 'http://api.tvmaze.com/schedule/full');
-				xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-				xhr.responseType = 'json';
-				xhr.addEventListener('load', function () {
-					_this2.setState({
-						listTvShows: xhr.response
-					});
-				});
-
-				xhr.send();
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(_Dashboard2.default, {
-					listTvShows: this.state.listTvShows
-				});
-			}
-		}]);
-
-		return DashboardPage;
-	}(_react2.default.Component);
-
-	exports.default = DashboardPage;
 
 /***/ })
 /******/ ]);
