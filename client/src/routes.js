@@ -1,7 +1,7 @@
 import Base from './components/Base.jsx';
 import HomePage from './components/HomePage.jsx';
 import LoginPage from './containers/LoginPage.jsx';
-import Dashboard from './components/Dashboard.jsx';
+import DashboardPage from './containers/Dashboard.jsx';
 
 
 const routes = {
@@ -13,7 +13,7 @@ const routes = {
     },
     {
       path: '/dashboard',
-      component: Dashboard
+      component: DashboardPage
     }
   ]
 };

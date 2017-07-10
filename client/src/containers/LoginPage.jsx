@@ -35,7 +35,6 @@ class LoginPage extends React.Component {
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
-      console.log(xhr.response);
       if (xhr.response.success) {
         this.setState({
           errors: {}
@@ -66,16 +65,13 @@ class LoginPage extends React.Component {
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
-      console.log('llegando user validate');
-      console.log(xhr.response);
       if (xhr.response.login) {
         this.setState({
           errors: {}
         });
         
-        console.log('login correct');
         this.context.router.replace('/dashboard');
-        
+
       } else {
         const errors = xhr.response.errors ? xhr.response.errors : {};
         errors.summary = xhr.response.message;

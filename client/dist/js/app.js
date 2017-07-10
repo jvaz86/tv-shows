@@ -39859,7 +39859,7 @@
 
 	var _LoginPage2 = _interopRequireDefault(_LoginPage);
 
-	var _Dashboard = __webpack_require__(474);
+	var _Dashboard = __webpack_require__(482);
 
 	var _Dashboard2 = _interopRequireDefault(_Dashboard);
 
@@ -41523,7 +41523,6 @@
 	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	      xhr.responseType = 'json';
 	      xhr.addEventListener('load', function () {
-	        console.log(xhr.response);
 	        if (xhr.response.success) {
 	          _this2.setState({
 	            errors: {}
@@ -41555,14 +41554,11 @@
 	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	      xhr.responseType = 'json';
 	      xhr.addEventListener('load', function () {
-	        console.log('llegando user validate');
-	        console.log(xhr.response);
 	        if (xhr.response.login) {
 	          _this3.setState({
 	            errors: {}
 	          });
 
-	          console.log('login correct');
 	          _this3.context.router.replace('/dashboard');
 	        } else {
 	          var errors = xhr.response.errors ? xhr.response.errors : {};
@@ -43721,32 +43717,843 @@
 
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 
-	var _Card = __webpack_require__(448);
+	var _GridList = __webpack_require__(475);
+
+	var _IconButton = __webpack_require__(349);
+
+	var _IconButton2 = _interopRequireDefault(_IconButton);
+
+	var _Subheader = __webpack_require__(479);
+
+	var _Subheader2 = _interopRequireDefault(_Subheader);
+
+	var _starBorder = __webpack_require__(481);
+
+	var _starBorder2 = _interopRequireDefault(_starBorder);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Dashboard = function Dashboard(_ref) {
-	  var secretData = _ref.secretData;
+	var styles = {
+	  root: {
+	    display: 'flex',
+	    flexWrap: 'wrap',
+	    justifyContent: 'space-around'
+	  },
+	  gridList: {
+	    width: 1000,
+	    overflowY: 'auto'
+	  }
+	};
+
+	var tilesData = [{
+	  img: 'images/grid-list/00-52-29-429_640.jpg',
+	  title: 'Breakfast',
+	  author: 'jill111'
+	}, {
+	  img: 'images/grid-list/burger-827309_640.jpg',
+	  title: 'Tasty burger',
+	  author: 'pashminu'
+	}, {
+	  img: 'images/grid-list/camera-813814_640.jpg',
+	  title: 'Camera',
+	  author: 'Danson67'
+	}, {
+	  img: 'images/grid-list/morning-819362_640.jpg',
+	  title: 'Morning',
+	  author: 'fancycrave1'
+	}, {
+	  img: 'images/grid-list/hats-829509_640.jpg',
+	  title: 'Hats',
+	  author: 'Hans'
+	}, {
+	  img: 'images/grid-list/honey-823614_640.jpg',
+	  title: 'Honey',
+	  author: 'fancycravel'
+	}, {
+	  img: 'images/grid-list/vegetables-790022_640.jpg',
+	  title: 'Vegetables',
+	  author: 'jill111'
+	}, {
+	  img: 'images/grid-list/water-plant-821293_640.jpg',
+	  title: 'Water plant',
+	  author: 'BkrmadtyaKarki'
+	}];
+
+	/**
+	 * A simple example of a scrollable `GridList` containing a [Subheader](/#/components/subheader).
+	 */
+	var GridListTvShows = function GridListTvShows() {
 	  return _react2.default.createElement(
-	    _Card.Card,
-	    { className: 'container' },
-	    _react2.default.createElement(_Card.CardTitle, {
-	      title: 'Dashboard',
-	      subtitle: 'You should get access to this page only after authentication.'
-	    }),
-	    secretData && _react2.default.createElement(
-	      _Card.CardText,
-	      { style: { fontSize: '16px', color: 'green' } },
-	      secretData
+	    'div',
+	    { style: styles.root },
+	    _react2.default.createElement(
+	      _GridList.GridList,
+	      {
+	        cellHeight: 180,
+	        style: styles.gridList
+	      },
+	      _react2.default.createElement(
+	        _Subheader2.default,
+	        null,
+	        'December'
+	      ),
+	      listTvShows.map(function (tile) {
+	        return _react2.default.createElement(
+	          _GridList.GridTile,
+	          {
+	            key: tile.img,
+	            title: tile.name,
+	            subtitle: _react2.default.createElement(
+	              'span',
+	              null,
+	              'by ',
+	              _react2.default.createElement(
+	                'b',
+	                null,
+	                tile.premiered
+	              )
+	            ),
+	            actionIcon: _react2.default.createElement(
+	              _IconButton2.default,
+	              null,
+	              _react2.default.createElement(_starBorder2.default, { color: 'white' })
+	            )
+	          },
+	          _react2.default.createElement('img', { src: tile.image.medium })
+	        );
+	      })
 	    )
 	  );
 	};
 
-	Dashboard.propTypes = {
-	  secretData: _propTypes2.default.string.isRequired
+	exports.default = GridListTvShows;
+
+/***/ }),
+/* 475 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = exports.GridTile = exports.GridList = undefined;
+
+	var _GridList2 = __webpack_require__(476);
+
+	var _GridList3 = _interopRequireDefault(_GridList2);
+
+	var _GridTile2 = __webpack_require__(477);
+
+	var _GridTile3 = _interopRequireDefault(_GridTile2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.GridList = _GridList3.default;
+	exports.GridTile = _GridTile3.default;
+	exports.default = _GridList3.default;
+
+/***/ }),
+/* 476 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends2 = __webpack_require__(342);
+
+	var _extends3 = _interopRequireDefault(_extends2);
+
+	var _objectWithoutProperties2 = __webpack_require__(347);
+
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+	var _getPrototypeOf = __webpack_require__(324);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(322);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(327);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(331);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(332);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _simpleAssign = __webpack_require__(348);
+
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function getStyles(props) {
+	  return {
+	    root: {
+	      display: 'flex',
+	      flexWrap: 'wrap',
+	      margin: -props.padding / 2
+	    },
+	    item: {
+	      boxSizing: 'border-box',
+	      padding: props.padding / 2
+	    }
+	  };
+	}
+
+	var GridList = function (_Component) {
+	  (0, _inherits3.default)(GridList, _Component);
+
+	  function GridList() {
+	    (0, _classCallCheck3.default)(this, GridList);
+	    return (0, _possibleConstructorReturn3.default)(this, (GridList.__proto__ || (0, _getPrototypeOf2.default)(GridList)).apply(this, arguments));
+	  }
+
+	  (0, _createClass3.default)(GridList, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          cols = _props.cols,
+	          padding = _props.padding,
+	          cellHeight = _props.cellHeight,
+	          children = _props.children,
+	          style = _props.style,
+	          other = (0, _objectWithoutProperties3.default)(_props, ['cols', 'padding', 'cellHeight', 'children', 'style']);
+	      var prepareStyles = this.context.muiTheme.prepareStyles;
+
+	      var styles = getStyles(this.props, this.context);
+	      var mergedRootStyles = (0, _simpleAssign2.default)(styles.root, style);
+
+	      var wrappedChildren = _react2.default.Children.map(children, function (currentChild) {
+	        if (_react2.default.isValidElement(currentChild) && currentChild.type.muiName === 'Subheader') {
+	          return currentChild;
+	        }
+	        var childCols = currentChild.props.cols || 1;
+	        var childRows = currentChild.props.rows || 1;
+	        var itemStyle = (0, _simpleAssign2.default)({}, styles.item, {
+	          width: 100 / cols * childCols + '%',
+	          height: cellHeight === 'auto' ? 'auto' : cellHeight * childRows + padding
+	        });
+
+	        return _react2.default.createElement(
+	          'div',
+	          { style: prepareStyles(itemStyle) },
+	          currentChild
+	        );
+	      });
+
+	      return _react2.default.createElement(
+	        'div',
+	        (0, _extends3.default)({ style: prepareStyles(mergedRootStyles) }, other),
+	        wrappedChildren
+	      );
+	    }
+	  }]);
+	  return GridList;
+	}(_react.Component);
+
+	GridList.defaultProps = {
+	  cols: 2,
+	  padding: 4,
+	  cellHeight: 180
+	};
+	GridList.contextTypes = {
+	  muiTheme: _react.PropTypes.object.isRequired
+	};
+	process.env.NODE_ENV !== "production" ? GridList.propTypes = {
+	  /**
+	   * Number of px for one cell height.
+	   * You can set `'auto'` if you want to let the children determine the height.
+	   */
+	  cellHeight: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.oneOf(['auto'])]),
+	  /**
+	   * Grid Tiles that will be in Grid List.
+	   */
+	  children: _react.PropTypes.node,
+	  /**
+	   * Number of columns.
+	   */
+	  cols: _react.PropTypes.number,
+	  /**
+	   * Number of px for the padding/spacing between items.
+	   */
+	  padding: _react.PropTypes.number,
+	  /**
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react.PropTypes.object
+	} : void 0;
+	exports.default = GridList;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 477 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends2 = __webpack_require__(342);
+
+	var _extends3 = _interopRequireDefault(_extends2);
+
+	var _objectWithoutProperties2 = __webpack_require__(347);
+
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+	var _getPrototypeOf = __webpack_require__(324);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(322);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(327);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(331);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(332);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _defineProperty2 = __webpack_require__(478);
+
+	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+	var _simpleAssign = __webpack_require__(348);
+
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function getStyles(props, context) {
+	  var _titleBar;
+
+	  var _context$muiTheme = context.muiTheme,
+	      baseTheme = _context$muiTheme.baseTheme,
+	      gridTile = _context$muiTheme.gridTile;
+
+
+	  var actionPos = props.actionIcon && props.actionPosition;
+
+	  var styles = {
+	    root: {
+	      position: 'relative',
+	      display: 'block',
+	      height: '100%',
+	      overflow: 'hidden'
+	    },
+	    titleBar: (_titleBar = {
+	      position: 'absolute',
+	      left: 0,
+	      right: 0
+	    }, (0, _defineProperty3.default)(_titleBar, props.titlePosition, 0), (0, _defineProperty3.default)(_titleBar, 'height', props.subtitle ? 68 : 48), (0, _defineProperty3.default)(_titleBar, 'background', props.titleBackground), (0, _defineProperty3.default)(_titleBar, 'display', 'flex'), (0, _defineProperty3.default)(_titleBar, 'alignItems', 'center'), _titleBar),
+	    titleWrap: {
+	      flexGrow: 1,
+	      marginLeft: actionPos !== 'left' ? baseTheme.spacing.desktopGutterLess : 0,
+	      marginRight: actionPos === 'left' ? baseTheme.spacing.desktopGutterLess : 0,
+	      color: gridTile.textColor,
+	      overflow: 'hidden'
+	    },
+	    title: {
+	      fontSize: '16px',
+	      textOverflow: 'ellipsis',
+	      overflow: 'hidden',
+	      whiteSpace: 'nowrap'
+	    },
+	    subtitle: {
+	      fontSize: '12px',
+	      textOverflow: 'ellipsis',
+	      overflow: 'hidden',
+	      whiteSpace: 'nowrap'
+	    },
+	    actionIcon: {
+	      order: actionPos === 'left' ? -1 : 1
+	    },
+	    childImg: {
+	      height: '100%',
+	      transform: 'translateX(-50%)',
+	      position: 'relative',
+	      left: '50%'
+	    }
+	  };
+	  return styles;
+	}
+
+	var GridTile = function (_Component) {
+	  (0, _inherits3.default)(GridTile, _Component);
+
+	  function GridTile() {
+	    (0, _classCallCheck3.default)(this, GridTile);
+	    return (0, _possibleConstructorReturn3.default)(this, (GridTile.__proto__ || (0, _getPrototypeOf2.default)(GridTile)).apply(this, arguments));
+	  }
+
+	  (0, _createClass3.default)(GridTile, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.ensureImageCover();
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      this.ensureImageCover();
+	    }
+	  }, {
+	    key: 'ensureImageCover',
+	    value: function ensureImageCover() {
+	      var _this2 = this;
+
+	      var imgEl = this.refs.img;
+
+	      if (imgEl) {
+	        (function () {
+	          var fit = function fit() {
+	            if (imgEl.offsetWidth < imgEl.parentNode.offsetWidth) {
+	              var isRtl = _this2.context.muiTheme.isRtl;
+
+	              imgEl.style.height = 'auto';
+	              if (isRtl) {
+	                imgEl.style.right = '0';
+	              } else {
+	                imgEl.style.left = '0';
+	              }
+	              imgEl.style.width = '100%';
+	              imgEl.style.top = '50%';
+	              imgEl.style.transform = imgEl.style.WebkitTransform = 'translateY(-50%)';
+	            }
+	            imgEl.removeEventListener('load', fit);
+	            imgEl = null; // prevent closure memory leak
+	          };
+	          if (imgEl.complete) {
+	            fit();
+	          } else {
+	            imgEl.addEventListener('load', fit);
+	          }
+	        })();
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          title = _props.title,
+	          subtitle = _props.subtitle,
+	          titlePosition = _props.titlePosition,
+	          titleBackground = _props.titleBackground,
+	          titleStyle = _props.titleStyle,
+	          actionIcon = _props.actionIcon,
+	          actionPosition = _props.actionPosition,
+	          style = _props.style,
+	          children = _props.children,
+	          containerElement = _props.containerElement,
+	          other = (0, _objectWithoutProperties3.default)(_props, ['title', 'subtitle', 'titlePosition', 'titleBackground', 'titleStyle', 'actionIcon', 'actionPosition', 'style', 'children', 'containerElement']);
+	      var prepareStyles = this.context.muiTheme.prepareStyles;
+
+	      var styles = getStyles(this.props, this.context);
+	      var mergedRootStyles = (0, _simpleAssign2.default)(styles.root, style);
+
+	      var titleBar = null;
+
+	      if (title) {
+	        titleBar = _react2.default.createElement(
+	          'div',
+	          { key: 'titlebar', style: prepareStyles(styles.titleBar) },
+	          _react2.default.createElement(
+	            'div',
+	            { style: prepareStyles(styles.titleWrap) },
+	            _react2.default.createElement(
+	              'div',
+	              { style: prepareStyles((0, _simpleAssign2.default)(styles.title, titleStyle)) },
+	              title
+	            ),
+	            subtitle ? _react2.default.createElement(
+	              'div',
+	              { style: prepareStyles(styles.subtitle) },
+	              subtitle
+	            ) : null
+	          ),
+	          actionIcon ? _react2.default.createElement(
+	            'div',
+	            { style: prepareStyles(styles.actionIcon) },
+	            actionIcon
+	          ) : null
+	        );
+	      }
+
+	      var newChildren = children;
+
+	      // if there is a single image passed as children
+	      // clone it and add our styles
+	      if (_react2.default.Children.count(children) === 1) {
+	        newChildren = _react2.default.Children.map(children, function (child) {
+	          if (child.type === 'img') {
+	            return _react2.default.cloneElement(child, {
+	              key: 'img',
+	              ref: 'img',
+	              style: prepareStyles((0, _simpleAssign2.default)({}, styles.childImg, child.props.style))
+	            });
+	          } else {
+	            return child;
+	          }
+	        });
+	      }
+
+	      var containerProps = (0, _extends3.default)({
+	        style: prepareStyles(mergedRootStyles)
+	      }, other);
+
+	      return _react2.default.isValidElement(containerElement) ? _react2.default.cloneElement(containerElement, containerProps, [newChildren, titleBar]) : _react2.default.createElement(containerElement, containerProps, [newChildren, titleBar]);
+	    }
+	  }]);
+	  return GridTile;
+	}(_react.Component);
+
+	GridTile.defaultProps = {
+	  titlePosition: 'bottom',
+	  titleBackground: 'rgba(0, 0, 0, 0.4)',
+	  actionPosition: 'right',
+	  cols: 1,
+	  rows: 1,
+	  containerElement: 'div'
+	};
+	GridTile.contextTypes = {
+	  muiTheme: _react.PropTypes.object.isRequired
+	};
+	process.env.NODE_ENV !== "production" ? GridTile.propTypes = {
+	  /**
+	   * An IconButton element to be used as secondary action target
+	   * (primary action target is the tile itself).
+	   */
+	  actionIcon: _react.PropTypes.element,
+	  /**
+	   * Position of secondary action IconButton.
+	   */
+	  actionPosition: _react.PropTypes.oneOf(['left', 'right']),
+	  /**
+	   * Theoretically you can pass any node as children, but the main use case is to pass an img,
+	   * in whichcase GridTile takes care of making the image "cover" available space
+	   * (similar to background-size: cover or to object-fit:cover).
+	   */
+	  children: _react.PropTypes.node,
+	  /**
+	   * Width of the tile in number of grid cells.
+	   */
+	  cols: _react.PropTypes.number,
+	  /**
+	   * Either a string used as tag name for the tile root element, or a ReactElement.
+	   * This is useful when you have, for example, a custom implementation of
+	   * a navigation link (that knows about your routes) and you want to use it as the primary tile action.
+	   * In case you pass a ReactElement, please ensure that it passes all props,
+	   * accepts styles overrides and render it's children.
+	   */
+	  containerElement: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.element]),
+	  /**
+	   * Height of the tile in number of grid cells.
+	   */
+	  rows: _react.PropTypes.number,
+	  /**
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react.PropTypes.object,
+	  /**
+	   * String or element serving as subtitle (support text).
+	   */
+	  subtitle: _react.PropTypes.node,
+	  /**
+	   * Title to be displayed on tile.
+	   */
+	  title: _react.PropTypes.node,
+	  /**
+	   * Style used for title bar background.
+	   * Useful for setting custom gradients for example
+	   */
+	  titleBackground: _react.PropTypes.string,
+	  /**
+	   * Position of the title bar (container of title, subtitle and action icon).
+	   */
+	  titlePosition: _react.PropTypes.oneOf(['top', 'bottom']),
+	  /**
+	   * Override the inline-styles of the title element.
+	   */
+	  titleStyle: _react.PropTypes.object
+	} : void 0;
+	exports.default = GridTile;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 478 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _defineProperty = __webpack_require__(328);
+
+	var _defineProperty2 = _interopRequireDefault(_defineProperty);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (obj, key, value) {
+	  if (key in obj) {
+	    (0, _defineProperty2.default)(obj, key, {
+	      value: value,
+	      enumerable: true,
+	      configurable: true,
+	      writable: true
+	    });
+	  } else {
+	    obj[key] = value;
+	  }
+
+	  return obj;
 	};
 
-	exports.default = Dashboard;
+/***/ }),
+/* 479 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _Subheader = __webpack_require__(480);
+
+	var _Subheader2 = _interopRequireDefault(_Subheader);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _Subheader2.default;
+
+/***/ }),
+/* 480 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends2 = __webpack_require__(342);
+
+	var _extends3 = _interopRequireDefault(_extends2);
+
+	var _objectWithoutProperties2 = __webpack_require__(347);
+
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+	var _simpleAssign = __webpack_require__(348);
+
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Subheader = function Subheader(props, context) {
+	  var children = props.children,
+	      inset = props.inset,
+	      style = props.style,
+	      other = (0, _objectWithoutProperties3.default)(props, ['children', 'inset', 'style']);
+	  var _context$muiTheme = context.muiTheme,
+	      prepareStyles = _context$muiTheme.prepareStyles,
+	      subheader = _context$muiTheme.subheader;
+
+
+	  var styles = {
+	    root: {
+	      boxSizing: 'border-box',
+	      color: subheader.color,
+	      fontSize: 14,
+	      fontWeight: subheader.fontWeight,
+	      lineHeight: '48px',
+	      paddingLeft: inset ? 72 : 16,
+	      width: '100%'
+	    }
+	  };
+
+	  return _react2.default.createElement(
+	    'div',
+	    (0, _extends3.default)({}, other, { style: prepareStyles((0, _simpleAssign2.default)(styles.root, style)) }),
+	    children
+	  );
+	};
+
+	Subheader.muiName = 'Subheader';
+
+	process.env.NODE_ENV !== "production" ? Subheader.propTypes = {
+	  /**
+	   * Node that will be placed inside the `Subheader`.
+	   */
+	  children: _react.PropTypes.node,
+	  /**
+	   * If true, the `Subheader` will be indented.
+	   */
+	  inset: _react.PropTypes.bool,
+	  /**
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react.PropTypes.object
+	} : void 0;
+
+	Subheader.defaultProps = {
+	  inset: false
+	};
+
+	Subheader.contextTypes = {
+	  muiTheme: _react.PropTypes.object.isRequired
+	};
+
+	exports.default = Subheader;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 481 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(377);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(386);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ToggleStarBorder = function ToggleStarBorder(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z' })
+	  );
+	};
+	ToggleStarBorder = (0, _pure2.default)(ToggleStarBorder);
+	ToggleStarBorder.displayName = 'ToggleStarBorder';
+	ToggleStarBorder.muiName = 'SvgIcon';
+
+	exports.default = ToggleStarBorder;
+
+/***/ }),
+/* 482 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict'; //This is for use new ECMAScript 6 variables type
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Dashboard = __webpack_require__(474);
+
+	var _Dashboard2 = _interopRequireDefault(_Dashboard);
+
+	var _propTypes = __webpack_require__(365);
+
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DashboardPage = function (_React$Component) {
+		_inherits(DashboardPage, _React$Component);
+
+		function DashboardPage(props) {
+			_classCallCheck(this, DashboardPage);
+
+			var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
+
+			_this.setState = {
+				listTvShows: []
+			};
+			return _this;
+		}
+
+		_createClass(DashboardPage, [{
+			key: 'getListTvShows',
+			value: function getListTvShows(event) {
+				var _this2 = this;
+
+				event.preventDefault();
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('get', 'http://api.tvmaze.com/schedule/full');
+				xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+				xhr.responseType = 'json';
+				xhr.addEventListener('load', function () {
+					_this2.setState({
+						listTvShows: xhr.response
+					});
+				});
+
+				xhr.send();
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(_Dashboard2.default, {
+					listTvShows: this.state.listTvShows
+				});
+			}
+		}]);
+
+		return DashboardPage;
+	}(_react2.default.Component);
+
+	exports.default = DashboardPage;
 
 /***/ })
 /******/ ]);
