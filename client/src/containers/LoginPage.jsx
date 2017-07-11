@@ -77,6 +77,9 @@ class LoginPage extends React.Component {
           errors: {}
         });
         
+        localStorage.setItem('userId', login.user.id);
+        localStorage.setItem('userName', login.user.name);
+        localStorage.setItem('userEmail', login.user.email);
         this.context.router.replace('/dashboard');
 
       } else {

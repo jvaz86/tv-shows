@@ -22,7 +22,8 @@ function getUser(req,res){
 			    }
 
 			    res.status(200).send({
-					login: isMatch
+					login: isMatch,
+					user: {'id': user[0].id, 'name': user[0].name, 'email': user[0].email}
 				});
 			});
 		}
