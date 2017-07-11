@@ -43759,16 +43759,10 @@
 				});
 			}
 		}, {
-			key: 'setFavorite',
-			value: function setFavorite(value) {
-				console.log('eject... ' + value);
-			}
-		}, {
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(_Dashboard2.default, {
-					listdos: this.state.listTvShows,
-					onClick: this.setFavorite
+					listdos: this.state.listTvShows
 				});
 			}
 		}]);
@@ -43810,6 +43804,10 @@
 
 	var _starBorder2 = _interopRequireDefault(_starBorder);
 
+	var _FavoritesBtn = __webpack_require__(600);
+
+	var _FavoritesBtn2 = _interopRequireDefault(_FavoritesBtn);
+
 	var _moment = __webpack_require__(483);
 
 	var _moment2 = _interopRequireDefault(_moment);
@@ -43830,8 +43828,7 @@
 	};
 
 	var GridListTvShows = function GridListTvShows(_ref) {
-	  var listdos = _ref.listdos,
-	      onClick = _ref.onClick;
+	  var listdos = _ref.listdos;
 	  return _react2.default.createElement(
 	    'div',
 	    { style: styles.root },
@@ -43864,11 +43861,7 @@
 	              tile.summary.replace(/(<([^>]+)>)/ig, "")
 	            ),
 	            style: styles.gridTile,
-	            actionIcon: _react2.default.createElement(
-	              _IconButton2.default,
-	              { onClick: onClick.bind(undefined, tile.id) },
-	              _react2.default.createElement(_starBorder2.default, { color: 'white' })
-	            ) },
+	            actionIcon: _react2.default.createElement(_FavoritesBtn2.default, { showid: tile.id }) },
 	          _react2.default.createElement('img', { src: tile.image.medium })
 	        );
 	      })
@@ -60325,6 +60318,73 @@
 
 	})));
 
+
+/***/ }),
+/* 600 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _IconButton = __webpack_require__(349);
+
+	var _IconButton2 = _interopRequireDefault(_IconButton);
+
+	var _starBorder = __webpack_require__(482);
+
+	var _starBorder2 = _interopRequireDefault(_starBorder);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FavoritesBtn = function (_React$Component) {
+		_inherits(FavoritesBtn, _React$Component);
+
+		function FavoritesBtn(props) {
+			_classCallCheck(this, FavoritesBtn);
+
+			var _this = _possibleConstructorReturn(this, (FavoritesBtn.__proto__ || Object.getPrototypeOf(FavoritesBtn)).call(this, props));
+
+			_this.state = {
+				color: "white"
+			};
+			return _this;
+		}
+
+		_createClass(FavoritesBtn, [{
+			key: 'onClick',
+			value: function onClick(id) {
+				console.log('The tv show id is: ' + id);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					_IconButton2.default,
+					null,
+					_react2.default.createElement(_starBorder2.default, { onClick: this.onClick.bind(this, this.props.showid), color: 'white' })
+				);
+			}
+		}]);
+
+		return FavoritesBtn;
+	}(_react2.default.Component);
+
+	exports.default = FavoritesBtn;
 
 /***/ })
 /******/ ]);

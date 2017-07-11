@@ -24,16 +24,11 @@ class DashboardPage extends React.Component {
 			this.setState({ listTvShows: shows })
 		})
 	}
-
-	setFavorite(value){
-		console.log('eject... '+ value)
-	}
 	
   	render() {
 	    return (
 	      <Dashboard
 	        listdos={this.state.listTvShows}
-	        onClick={this.setFavorite}
 	      />
 	    );
   	}

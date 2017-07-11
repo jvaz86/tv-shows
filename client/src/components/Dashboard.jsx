@@ -4,6 +4,7 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import FavoritesBtn from '../containers/FavoritesBtn.jsx';
 import moment from 'moment';
 
 const styles = {
@@ -20,8 +21,7 @@ const styles = {
 };
 
 const GridListTvShows = ({
-  listdos,
-  onClick
+  listdos
 }) => (
   <div style={styles.root}>
     <GridList
@@ -35,7 +35,7 @@ const GridListTvShows = ({
           title={tile.name + ' | ' + moment(tile.premiered).format('Y') + ' | ' + tile.genres.join(', ')}
           subtitle={<span><b>Summary: </b> {tile.summary.replace(/(<([^>]+)>)/ig,"")}</span>}
           style={styles.gridTile}
-          actionIcon={<IconButton onClick={onClick.bind(this,tile.id)} ><StarBorder color="white" /></IconButton>}>
+          actionIcon={<FavoritesBtn showid={tile.id} />}>
           <img src={tile.image.medium} />
         </GridTile>
       ))}
