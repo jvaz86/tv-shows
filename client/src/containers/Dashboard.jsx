@@ -11,21 +11,26 @@ class DashboardPage extends React.Component {
 	    super(props);
 
 	    this.state = {
-	      listTvShows: [],
-	      favorites: []
+			listTvShows: [],
+			favorites: [],
+			userName: ''
 	    };
 	}
 
 	componentWillMount() {
 
 		const userId = localStorage.getItem('userId');
+		const userName = localStorage.getItem('userName');
 
 		fetch(`/api/favorites/${userId}`)
 		.then((response) => {
 			return response.json()
 		})
 		.then((favorites) => {
-			this.setState({ favorites: favorites })
+			this.setState({ 
+				favorites: favorites,
+				userName: userName
+			})
 			this.getFavorites();
 		})
 	}
@@ -58,6 +63,7 @@ class DashboardPage extends React.Component {
 	    return (
 	      <Dashboard
 	        listdos={this.state.listTvShows}
+	        userName={this.state.userName}
 	      />
 	    );
   	}

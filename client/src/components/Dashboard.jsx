@@ -5,7 +5,10 @@ import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import FavoritesBtn from '../containers/FavoritesBtn.jsx';
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
 import moment from 'moment';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 const styles = {
   root: {
@@ -17,13 +20,28 @@ const styles = {
     width: 1000,
     overflowY: 'auto',
     fontSize: 8
+  },
+  bar: {
+    backgroundColor: 'rgb(48, 48, 48)'
+  },
+  textBar: {
+    color: 'white'
   }
 };
 
 const GridListTvShows = ({
-  listdos
+  listdos,
+  userName
 }) => (
   <div style={styles.root}>
+    <AppBar
+      title="TV SHOWS"
+      iconElementLeft={<div></div>}
+      iconElementRight={<div><em>{userName}</em> <FlatButton label="Log out" /></div>}
+      titleStyle={styles.textBar}
+      style={styles.bar}
+      iconStyleRight={styles.textBar}
+    />
     <GridList
       cellHeight={180}
       style={styles.gridList}

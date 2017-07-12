@@ -4,8 +4,6 @@ import { Link, IndexLink } from 'react-router';
 
 const Base = ({ children }) => (
   <div>
-  <br/>
-  <br/>
     {children}
   </div>
 );
