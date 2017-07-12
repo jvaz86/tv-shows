@@ -7,14 +7,16 @@ import PropTypes from 'prop-types';
 class DashboardPage extends React.Component {
 
 
-	constructor(props) {
-	    super(props);
+	constructor(props,context) {
+    	super(props,context);
 
 	    this.state = {
 			listTvShows: [],
 			favorites: [],
 			userName: ''
 	    };
+
+	    this.logOut = this.logOut.bind(this);
 	}
 
 	componentWillMount() {
@@ -58,16 +60,31 @@ class DashboardPage extends React.Component {
 			this.setState({ listTvShows: shows });
 		})
 	}
+
+	logOut(event){
+    	event.preventDefault();
+
+		localStorage.removeItem('userId');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userEmail');
+        
+        this.context.router.replace('/');
+	}
 	
   	render() {
 	    return (
 	      <Dashboard
 	        listdos={this.state.listTvShows}
 	        userName={this.state.userName}
+	        logOut={this.logOut}
 	      />
 	    );
   	}
 
 }
+
+DashboardPage.contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
 export default DashboardPage;

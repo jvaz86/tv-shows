@@ -31,13 +31,14 @@ const styles = {
 
 const GridListTvShows = ({
   listdos,
-  userName
+  userName,
+  logOut
 }) => (
   <div style={styles.root}>
     <AppBar
       title="TV SHOWS"
       iconElementLeft={<div></div>}
-      iconElementRight={<div><em>{userName}</em> <FlatButton label="Log out" /></div>}
+      iconElementRight={<div><em>{userName}</em> <FlatButton onClick={logOut} label="Log out" /></div>}
       titleStyle={styles.textBar}
       style={styles.bar}
       iconStyleRight={styles.textBar}

@@ -9,7 +9,13 @@ const routes = {
   childRoutes: [
     {
       path: '/',
-      component: LoginPage
+      getComponent: (location, callback) => {
+        if (localStorage.getItem('userId')) {
+          callback(null, DashboardPage);
+        } else {
+          callback(null, LoginPage);
+        }
+      }
     },
     {
       path: '/dashboard',

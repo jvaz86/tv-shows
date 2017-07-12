@@ -34,7 +34,6 @@ function deleteFavoriteTvShow(req,res){
 
 function getFavoriteTvShow(req,res){
 	var query = `SELECT favorite_id FROM tv_shows.favorites WHERE user_id=${req.params.userId}`;
-	console.log(query);
 	connect.cn.query(query,(err, favorites) => {
 		if (err) {
 			res.status(200).send({
