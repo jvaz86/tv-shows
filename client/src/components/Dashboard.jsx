@@ -35,7 +35,7 @@ const GridListTvShows = ({
           title={tile.name + ' | ' + moment(tile.premiered).format('Y') + ' | ' + tile.genres.join(', ')}
           subtitle={<span><b>Summary: </b> {tile.summary.replace(/(<([^>]+)>)/ig,"")}</span>}
           style={styles.gridTile}
-          actionIcon={<FavoritesBtn showid={tile.id} />}>
+          actionIcon={<FavoritesBtn showid={tile.id} favorite={tile.favorite} />}>
           <img src={tile.image.medium} />
         </GridTile>
       ))}

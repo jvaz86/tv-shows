@@ -43745,7 +43745,8 @@
 			var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
 
 			_this.state = {
-				listTvShows: []
+				listTvShows: [],
+				favorites: []
 			};
 			return _this;
 		}
@@ -43755,10 +43756,38 @@
 			value: function componentWillMount() {
 				var _this2 = this;
 
+				var userId = localStorage.getItem('userId');
+
+				fetch('/api/favorites/' + userId).then(function (response) {
+					return response.json();
+				}).then(function (favorites) {
+					_this2.setState({ favorites: favorites });
+					_this2.getFavorites();
+				});
+			}
+		}, {
+			key: 'getFavorites',
+			value: function getFavorites(favorites) {
+				var _this3 = this;
+
 				fetch('http://api.tvmaze.com/shows').then(function (response) {
 					return response.json();
 				}).then(function (shows) {
-					_this2.setState({ listTvShows: shows });
+
+					var f = _this3.state.favorites.favorites;
+					shows.map(function (elem, index) {
+						var saveFavorite = false;
+						f.map(function (elem2, index2) {
+							if (elem2.favorite_id == elem.id) {
+								saveFavorite = true;
+								shows[index].favorite = true;
+							} else if (!saveFavorite) {
+								shows[index].favorite = false;
+							}
+						});
+					});
+
+					_this3.setState({ listTvShows: shows });
 				});
 			}
 		}, {
@@ -43864,7 +43893,7 @@
 	              tile.summary.replace(/(<([^>]+)>)/ig, "")
 	            ),
 	            style: styles.gridTile,
-	            actionIcon: _react2.default.createElement(_FavoritesBtn2.default, { showid: tile.id }) },
+	            actionIcon: _react2.default.createElement(_FavoritesBtn2.default, { showid: tile.id, favorite: tile.favorite }) },
 	          _react2.default.createElement('img', { src: tile.image.medium })
 	        );
 	      })
@@ -44562,16 +44591,52 @@
 
 			var _this = _possibleConstructorReturn(this, (FavoritesBtn.__proto__ || Object.getPrototypeOf(FavoritesBtn)).call(this, props));
 
-			_this.state = {
-				color: "white"
-			};
+			if (props.favorite) {
+				_this.state = {
+					color: "rgb(255, 195, 0)"
+				};
+			} else {
+				_this.state = {
+					color: "white"
+				};
+			}
 			return _this;
 		}
 
 		_createClass(FavoritesBtn, [{
 			key: 'onClick',
-			value: function onClick(id) {
-				console.log('The tv show id is: ' + id);
+			value: function onClick(showId) {
+				var _this2 = this;
+
+				var userId = localStorage.getItem('userId');
+
+				if (this.state.color == "white") {
+					fetch('/api/favorites/save/' + userId + '/' + showId).then(function (response) {
+						return response.json();
+					}).then(function (data) {
+						if (data.saveFavorite) {
+							_this2.setState({
+								color: "rgb(255, 195, 0)"
+							});
+						}
+					});
+				} else {
+					var data = 'userId=' + userId + '&showId=' + showId;
+
+					fetch('/api/favorites/delete', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+						body: data
+					}).then(function (response) {
+						return response.json();
+					}).then(function (data) {
+						if (data.deleteFavorite) {
+							_this2.setState({
+								color: "white"
+							});
+						}
+					});
+				}
 			}
 		}, {
 			key: 'render',
@@ -44579,7 +44644,7 @@
 				return _react2.default.createElement(
 					_IconButton2.default,
 					null,
-					_react2.default.createElement(_starBorder2.default, { onClick: this.onClick.bind(this, this.props.showid), color: 'white' })
+					_react2.default.createElement(_starBorder2.default, { onClick: this.onClick.bind(this, this.props.showid), color: this.state.color })
 				);
 			}
 		}]);

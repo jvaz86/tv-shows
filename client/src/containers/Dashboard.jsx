@@ -11,17 +11,46 @@ class DashboardPage extends React.Component {
 	    super(props);
 
 	    this.state = {
-	      listTvShows: []
+	      listTvShows: [],
+	      favorites: []
 	    };
 	}
 
 	componentWillMount() {
+
+		const userId = localStorage.getItem('userId');
+
+		fetch(`/api/favorites/${userId}`)
+		.then((response) => {
+			return response.json()
+		})
+		.then((favorites) => {
+			this.setState({ favorites: favorites })
+			this.getFavorites();
+		})
+	}
+
+	getFavorites(favorites){
 		fetch('http://api.tvmaze.com/shows')
 		.then((response) => {
 			return response.json()
 		})
 		.then((shows) => {
-			this.setState({ listTvShows: shows })
+
+			const f = this.state.favorites.favorites;
+			shows.map(function(elem,index) {
+				var saveFavorite = false;
+				f.map(function(elem2, index2) {
+					if (elem2.favorite_id == elem.id) {
+						saveFavorite = true;
+						shows[index].favorite = true;
+					}else if (!saveFavorite){
+						shows[index].favorite = false;
+					}
+				})
+			});
+		
+			this.setState({ listTvShows: shows });
 		})
 	}
 	

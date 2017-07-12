@@ -7,18 +7,57 @@ class FavoritesBtn extends React.Component {
 	constructor(props){
 		super(props);
 
-		this.state = {
-			color: "white"
+		if (props.favorite) {
+			this.state = {
+				color: "rgb(255, 195, 0)"
+			}
+		}else{
+			this.state = {
+				color: "white"
+			}
 		}
 	}
 
-	onClick(id){
-		console.log('The tv show id is: '+id);
+	onClick(showId){
+		var userId = localStorage.getItem('userId');
+
+		if (this.state.color == "white") {
+			fetch(`/api/favorites/save/${userId}/${showId}`)
+		    .then((response) => {
+		      return response.json()
+		    })
+		    .then((data) => {
+		      	if (data.saveFavorite) {
+					this.setState({
+						color: "rgb(255, 195, 0)"
+					});
+		      	}
+		    })
+		}else{
+		    const data = `userId=${userId}&showId=${showId}`;
+
+			fetch(`/api/favorites/delete`, {
+		        method: 'POST',
+		        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+		        body: data
+		    })
+		    .then((response) => {
+		      return response.json()
+		    })
+		    .then((data) => {
+		      	if (data.deleteFavorite) {
+					this.setState({
+						color: "white"
+					});
+		      	}
+		    })
+		}
+
 	}
 
 	render(){
 		return(
-			<IconButton ><StarBorder onClick={this.onClick.bind(this,this.props.showid)} color="white" /></IconButton>
+			<IconButton ><StarBorder onClick={this.onClick.bind(this,this.props.showid)} color={this.state.color} /></IconButton>
 		);
 	}
 }

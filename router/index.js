@@ -1,26 +1,22 @@
 'use strict' //This is for use new ECMAScript 6 variables type
 
-const express = require('express')
-const api = express.Router()
-//const Favorites = require('../models/favorites')
-const User = require('../models/users')
+const express = require('express');
+const api = express.Router();
+const User = require('../models/users');
+const Favorites = require('../models/favorites');
 
 
 //--- Start GET request---------------------------
-// api.get('/product',ProductModel.getProducts)
-// api.get('/product/:id',ProductModel.getProduct)
+api.get('/favorites/save/:userId/:showId',Favorites.addFavoriteTvShow);
+api.get('/favorites/:userId',Favorites.getFavoriteTvShow);
 //-----End GET request-----------------------------
 
 //--- Start POST request---------------------------
-api.post('/user/login',User.getUser)
+api.post('/user/login',User.getUser);
 //-----End POST request-----------------------------
 
-//--- Start PUT request---------------------------
-// api.put('/product/:id',ProductModel.updateProduct)
-//-----End PUT request-----------------------------
-
 //--- Start DELETE request---------------------------
-// api.delete('/product/:id',ProductModel.deleteProduct)
+api.post('/favorites/delete',Favorites.deleteFavoriteTvShow);
 //-----End DELETE request-----------------------------
 
-module.exports = api
+module.exports = api;
