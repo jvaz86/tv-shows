@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { Card, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-import {fullWhite} from 'material-ui/styles/colors';
-import TextField from 'material-ui/TextField';
+import Card from 'material-ui/Card';
+import Button from 'material-ui/Button';
+import {fullWhite} from 'material-ui/colors';
+import TextField from 'material-ui/Input/Input';
 
 const LoginForm = ({
   onSubmit,
@@ -20,10 +20,10 @@ const LoginForm = ({
       {errors.summary && <p className="error-message">{errors.summary}</p>}
 
       <div className="field-line">
+        
         <TextField
-          floatingLabelText="Email"
+          placeholder="Email"
           name="email"
-          errorText={errors.email}
           onChange={onChange}
           value={user.email}
         />
@@ -31,17 +31,16 @@ const LoginForm = ({
 
       <div className="field-line">
         <TextField
-          floatingLabelText="Password"
+          placeholder="Password"
           type="password"
           name="password"
           onChange={onChange}
-          errorText={errors.password}
           value={user.password}
         />
       </div>
 
       <div className="button-line">
-        <RaisedButton type="submit" label="Log in" backgroundColor="#B8B3B2" labelColor="#3D3B3A"/>
+        <Button raised color="primary" type="submit">Log In</Button>
       </div>
       <br />
       <br />

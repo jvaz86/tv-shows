@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {GridList, GridTile} from 'material-ui/GridList';
-import IconButton from 'material-ui/IconButton';
-import Subheader from 'material-ui/Subheader';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import Grid from 'material-ui/Grid';
+import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+//import Subheader from 'material-ui/Subheader';
 import FavoritesBtn from '../containers/FavoritesBtn.jsx';
 import AppBar from 'material-ui/AppBar';
-import FlatButton from 'material-ui/FlatButton';
+import Button from 'material-ui/Button';
+import Paper from 'material-ui/Paper';
 import moment from 'moment';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 const styles = {
   root: {
@@ -18,14 +20,26 @@ const styles = {
   },
   gridList: {
     width: 1000,
-    overflowY: 'auto',
-    fontSize: 8
+    margin: '0 auto',
+    fontSize: 12
   },
   bar: {
     backgroundColor: 'rgb(48, 48, 48)'
   },
-  textBar: {
-    color: 'white'
+  root: {
+    flexGrow: 1,
+  },
+  flex: {
+    flex: 1,
+  },
+  card: {
+  	width: '100%'
+  },
+  img: {
+  	height: '100%',
+    transform: 'translateX(-50%)',
+    position: 'relative',
+    left: '50%'
   }
 };
 
@@ -34,31 +48,49 @@ const GridListTvShows = ({
   userName,
   logOut
 }) => (
+
   <div style={styles.root}>
-    <AppBar
-      title="TV SHOWS"
-      iconElementLeft={<div></div>}
-      iconElementRight={<div><em>{userName}</em> <FlatButton onClick={logOut} label="Log out" /></div>}
-      titleStyle={styles.textBar}
-      style={styles.bar}
-      iconStyleRight={styles.textBar}
-    />
-    <GridList
-      cellHeight={180}
-      style={styles.gridList}
-    >
-      <Subheader>December</Subheader>
-      {listdos.map((tile) => (
-        <GridTile
-          key={tile.id}
-          title={tile.name + ' | ' + moment(tile.premiered).format('Y') + ' | ' + tile.genres.join(', ')}
-          subtitle={<span><b>Summary: </b> {tile.summary.replace(/(<([^>]+)>)/ig,"")}</span>}
-          style={styles.gridTile}
-          actionIcon={<FavoritesBtn showid={tile.id} favorite={tile.favorite} />}>
-          <img src={tile.image.medium} />
-        </GridTile>
-      ))}
-    </GridList>
+    <AppBar position="static">
+        <Toolbar>
+			<Typography type="title" color="inherit" style={styles.flex}>
+				TV SHOWS
+			</Typography>
+			<Typography type="title" color="inherit" style={styles.flex} align="center">
+				{userName}
+			</Typography>
+			<Button onClick={logOut} color="contrast">Log Out</Button>
+        </Toolbar>
+     </AppBar>
+
+    <Grid container style={styles.gridList}>
+        {listdos.map((tile) => (
+			<Grid
+				key={tile.id}
+				title={tile.name + ' | ' + moment(tile.premiered).format('Y') + ' | ' + tile.genres.join(', ')}
+				item xs={6}
+			>
+
+				<Card style={styles.card}>
+			        <CardMedia>
+			          	<img style={styles.img} src={tile.image.medium} />
+			        </CardMedia>
+			        <CardContent>
+						<Typography type="headline" component="h2">
+							{tile.name + ' | ' + moment(tile.premiered).format('Y') + ' | ' + tile.genres.join(', ')}
+						</Typography>
+						<Typography component="p">
+							{tile.summary.replace(/(<([^>]+)>)/ig,"")}
+						</Typography>
+			        </CardContent>
+			        <CardActions>
+		          		<FavoritesBtn showid={tile.id} favorite={tile.favorite} />
+			        </CardActions>
+			    </Card>
+
+			</Grid>
+		))}
+    </Grid>
+
   </div>
 );
 
