@@ -19,12 +19,13 @@ function getUser(req,res){
 						login: isMatch,
 						message: 'Password is wrong'
 					});
+					res.end();
+			    }else{
+				    res.status(200).send({
+						login: isMatch,
+						user: {'id': user[0].id, 'name': user[0].name, 'email': user[0].email}
+					});
 			    }
-
-			    res.status(200).send({
-					login: isMatch,
-					user: {'id': user[0].id, 'name': user[0].name, 'email': user[0].email}
-				});
 			});
 		}
 	})

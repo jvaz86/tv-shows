@@ -2,15 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from 'material-ui/Grid';
 import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
-//import Subheader from 'material-ui/Subheader';
 import FavoritesBtn from '../containers/FavoritesBtn.jsx';
 import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/Button';
-import Paper from 'material-ui/Paper';
 import moment from 'moment';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 const styles = {
   root: {
@@ -62,6 +59,8 @@ const GridListTvShows = ({
         </Toolbar>
      </AppBar>
 
+	<br />
+	<br />
     <Grid container style={styles.gridList}>
         {listdos.map((tile) => (
 			<Grid

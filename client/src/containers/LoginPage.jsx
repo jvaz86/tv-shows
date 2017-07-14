@@ -21,6 +21,7 @@ class LoginPage extends React.Component {
 
     this.processForm = this.processForm.bind(this);
     this.changeUser = this.changeUser.bind(this);
+    this.validUser = this.validUser.bind(this);
   }
 
   processForm(event) {
@@ -44,7 +45,28 @@ class LoginPage extends React.Component {
           errors: {}
         });
 
-        this.validUser(login.data);
+        var f = this.validUser(login.data);
+
+        f.then((login) => {
+          if (login.login) {
+            this.setState({
+              errors: {}
+            });
+
+            localStorage.setItem('userId', login.user.id);
+            localStorage.setItem('userName', login.user.name);
+            localStorage.setItem('userEmail', login.user.email);
+            this.context.router.replace('/');
+
+          } else {
+            const errors = login.errors ? login.errors : {};
+            errors.summary = login.message;
+
+            this.setState({
+              errors
+            });
+          }
+        })
 
       } else {
         const errors = login.errors ? login.errors : {};
@@ -63,7 +85,7 @@ class LoginPage extends React.Component {
     const password = data.password;
     const formData = `email=${email}&password=${password}`;
 
-    fetch(`/api/user/login`, {
+    var f = fetch(`/api/user/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formData
@@ -71,27 +93,8 @@ class LoginPage extends React.Component {
     .then((response) => {
       return response.json()
     })
-    .then((login) => {
-      if (login.login) {
-        this.setState({
-          errors: {}
-        });
-        
-        localStorage.setItem('userId', login.user.id);
-        localStorage.setItem('userName', login.user.name);
-        localStorage.setItem('userEmail', login.user.email);
-        this.context.router.replace('/dashboard');
 
-      } else {
-        const errors = login.errors ? login.errors : {};
-        errors.summary = login.message;
-
-        this.setState({
-          errors
-        });
-      }
-    })
-
+    return f;
   }
 
   changeUser(event) {
