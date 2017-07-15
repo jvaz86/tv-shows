@@ -1,4 +1,4 @@
-# TV-SHOWS APP
+# TV-SHOWS APP MADE BY JOHANDER VAZQUEZ
 App for a test developed with react, nodejs and mysql
 
 ## Restore Database
@@ -30,13 +30,13 @@ npm install
 
 2) For execute the app, writing the following command
 
-In a terminal
+* In a terminal
 
 ```
 npm start
 ```
 
-In other terminal
+* In other terminal
 
 ```
 npm run bundle
@@ -51,7 +51,7 @@ http://localhost:3000/
 4) For made to login, the user and passwork are the following
 
 ```
-user: 'test@test.com'
+user: test@test.com
 password: 123456
 ```
 
