@@ -1,6 +1,7 @@
-import React from 'react';
+import	React from 'react';
 import IconButton from 'material-ui/IconButton';
 import StarIcon from 'material-ui-icons/Star';
+import IconFavorite from 'material-ui-icons/Favorite';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
 
 class FavoritesBtn extends React.Component {
@@ -10,11 +11,11 @@ class FavoritesBtn extends React.Component {
 
 		if (props.favorite) {
 			this.state = {
-				color: '#3f51b5'
+				color: 0
 			}
 		}else{
 			this.state = {
-				color: 'rgba(0, 0, 0, 0.54)'
+				color: 1
 			}
 		}
 	}
@@ -22,7 +23,7 @@ class FavoritesBtn extends React.Component {
 	onClick(showId){
 		var userId = localStorage.getItem('userId');
 
-		if (this.state.color == 'rgba(0, 0, 0, 0.54)') {
+		if (this.state.color == 1) {
 			fetch(`/api/favorites/save/${userId}/${showId}`)
 		    .then((response) => {
 		      return response.json()
@@ -30,7 +31,7 @@ class FavoritesBtn extends React.Component {
 		    .then((data) => {
 		      	if (data.saveFavorite) {
 					this.setState({
-						color: '#3f51b5'
+						color: 0
 					});
 		      	}
 		    })
@@ -48,7 +49,7 @@ class FavoritesBtn extends React.Component {
 		    .then((data) => {
 		      	if (data.deleteFavorite) {
 					this.setState({
-						color: 'rgba(0, 0, 0, 0.54)'
+						color: 1
 					});
 		      	}
 		    })
@@ -58,7 +59,9 @@ class FavoritesBtn extends React.Component {
 
 	render(){
 		return(
-			<IconButton ><StarIcon onClick={this.onClick.bind(this,this.props.showid)} color={this.state.color} /></IconButton>
+			<BottomNavigation index={this.state.color} onChange={this.onClick.bind(this,this.props.showid)}>
+	          <BottomNavigationButton icon={<IconFavorite />} />
+	        </BottomNavigation>
 		);
 	}
 }

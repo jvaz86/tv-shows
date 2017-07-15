@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-//import dark from 'material-ui/styles/baseThemes/darkBaseTheme';
-//import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import { browserHistory, Router } from 'react-router';
@@ -13,7 +11,6 @@ injectTapEventPlugin();
 
 ReactDom.render(
 	(
-		// <MuiThemeProvider muiTheme={getMuiTheme(dark)}>
 		<MuiThemeProvider>
 			<Router history={browserHistory} routes={routes} />
 		</MuiThemeProvider>

@@ -16,10 +16,6 @@ const routes = {
           callback(null, LoginPage);
         }
       }
-    },
-    {
-      path: '/dashboard',
-      component: DashboardPage
     }
   ]
 };

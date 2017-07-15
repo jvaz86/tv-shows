@@ -75,14 +75,9 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// remove tap delay, essential for MaterialUI to work properly
-
-	//import dark from 'material-ui/styles/baseThemes/darkBaseTheme';
-	//import getMuiTheme from 'material-ui/styles/getMuiTheme';
 	(0, _reactTapEventPlugin2.default)();
 
-	_reactDom2.default.render(
-	// <MuiThemeProvider muiTheme={getMuiTheme(dark)}>
-	_react2.default.createElement(
+	_reactDom2.default.render(_react2.default.createElement(
 		_MuiThemeProvider2.default,
 		null,
 		_react2.default.createElement(_reactRouter.Router, { history: _reactRouter.browserHistory, routes: _routes2.default })
@@ -35650,9 +35645,6 @@
 	        callback(null, _LoginPage2.default);
 	      }
 	    }
-	  }, {
-	    path: '/dashboard',
-	    component: _Dashboard2.default
 	  }]
 	};
 
@@ -36581,6 +36573,12 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var styles = {
+	  btnLogin: {
+	    margin: '0 auto'
+	  }
+	};
+
 	var LoginForm = function LoginForm(_ref) {
 	  var onSubmit = _ref.onSubmit,
 	      onChange = _ref.onChange,
@@ -36653,7 +36651,7 @@
 	        null,
 	        _react2.default.createElement(
 	          _Button2.default,
-	          { raised: true, color: 'primary', type: 'submit' },
+	          { style: styles.btnLogin, raised: true, color: 'primary', type: 'submit' },
 	          'Log In'
 	        )
 	      ),
@@ -42630,6 +42628,10 @@
 
 	var _Star2 = _interopRequireDefault(_Star);
 
+	var _Favorite = __webpack_require__(515);
+
+	var _Favorite2 = _interopRequireDefault(_Favorite);
+
 	var _BottomNavigation = __webpack_require__(523);
 
 	var _BottomNavigation2 = _interopRequireDefault(_BottomNavigation);
@@ -42652,11 +42654,11 @@
 
 			if (props.favorite) {
 				_this.state = {
-					color: '#3f51b5'
+					color: 0
 				};
 			} else {
 				_this.state = {
-					color: 'rgba(0, 0, 0, 0.54)'
+					color: 1
 				};
 			}
 			return _this;
@@ -42669,13 +42671,13 @@
 
 				var userId = localStorage.getItem('userId');
 
-				if (this.state.color == 'rgba(0, 0, 0, 0.54)') {
+				if (this.state.color == 1) {
 					fetch('/api/favorites/save/' + userId + '/' + showId).then(function (response) {
 						return response.json();
 					}).then(function (data) {
 						if (data.saveFavorite) {
 							_this2.setState({
-								color: '#3f51b5'
+								color: 0
 							});
 						}
 					});
@@ -42691,7 +42693,7 @@
 					}).then(function (data) {
 						if (data.deleteFavorite) {
 							_this2.setState({
-								color: 'rgba(0, 0, 0, 0.54)'
+								color: 1
 							});
 						}
 					});
@@ -42701,9 +42703,9 @@
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
-					_IconButton2.default,
-					null,
-					_react2.default.createElement(_Star2.default, { onClick: this.onClick.bind(this, this.props.showid), color: this.state.color })
+					_BottomNavigation2.default,
+					{ index: this.state.color, onChange: this.onClick.bind(this, this.props.showid) },
+					_react2.default.createElement(_BottomNavigation.BottomNavigationButton, { icon: _react2.default.createElement(_Favorite2.default, null) })
 				);
 			}
 		}]);
@@ -43046,7 +43048,45 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 515 */,
+/* 515 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(516);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(521);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var _ref = _react2.default.createElement('path', { d: 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' });
+
+	var Favorite = function Favorite(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _ref
+	  );
+	};
+
+	Favorite = (0, _pure2.default)(Favorite);
+	Favorite.muiName = 'SvgIcon';
+
+	exports.default = Favorite;
+
+/***/ }),
 /* 516 */
 /***/ (function(module, exports, __webpack_require__) {
 

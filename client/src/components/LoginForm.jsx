@@ -9,6 +9,12 @@ import Typography from 'material-ui/Typography';
 import FormHelperText from 'material-ui/Form/FormHelperText';
 import FormControl from 'material-ui/Form/FormControl';
 
+const styles = {
+  btnLogin: {
+    margin: '0 auto'
+  }
+};
+
 const LoginForm = ({
   onSubmit,
   onChange,
@@ -52,8 +58,8 @@ const LoginForm = ({
           </Typography>
           <br/>
         </CardContent>
-      <CardActions>
-        <Button raised color="primary" type="submit">Log In</Button>
+      <CardActions >
+        <Button style={styles.btnLogin} raised color="primary" type="submit">Log In</Button>
       </CardActions>
 
       <br />
