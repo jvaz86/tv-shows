@@ -30,9 +30,13 @@ npm install
 
 2) For execute the app, writing the following command
 
+In a terminal
+
 ```
-npm install
+npm start
 ```
+
+In other terminal
 
 ```
 npm run bundle
